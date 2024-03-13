@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Assignment Async/Sync</title>
+</head>
+<body>
+    <script>
+
+        // const ths = () => {
+        //     console.log('ananymous');
+        // };
+
+        
+        // function registerUser() {
+        //     setTimeout(() => {
+        //         console.log(`User registered`);
+        //         //callback();
+        //     }, 1000);
+        // }
+
+        // function emailUser() {
+        //     setTimeout(() => {
+        //         console.log(`Email sent `);
+        //     }, 1000);
+        // }
+
+        // function loginUser() {
+        //     setTimeout(() => {
+        //         console.log(`User logged in`);
+        //     }, 1000);
+        // }
+
+        // registerUser();
+        // emailUser();
+        // loginUser();
+        //  CALLBACK 
+        // function registerUser(callback) {
+        //     setTimeout(() => {
+        //         console.log(`User registered`);
+        //         callback();
+        //     }, 2000);
+        // }
+
+        // function emailUser(callback) {
+        //     setTimeout(() => {
+        //         console.log(`Email sent `);
+        //         callback();
+        //     }, 5000);
+        // }
+
+        // function loginUser() {
+        //     setTimeout(() => {
+        //         console.log(`User logged in`);
+        //     }, 1000);
+        // }
+
+        // // Example of callback hell
+        // registerUser( function () {
+        //     emailUser(()=>{
+        //         loginUser();
+        //     });
+        // });
+        
+        //CALL BACK CONVERT IN TO PROMISES
+
+        function registerUser() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`User registered`);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        function emailUser() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    reject('HERE IS THE ERROR');
+                    console.log(`Email sent to`);
+                }, 1000);
+            });
+        }
+
+        function loginUser() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(`User logged in`);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        // Example using Promises
+        registerUser().then(() => {
+                return emailUser();
+            })
+            .then(() => {
+                return loginUser();
+            })
+            .then(() => {
+                console.log('COMPLETED');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
